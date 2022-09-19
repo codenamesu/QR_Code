@@ -35,8 +35,13 @@ namespace WindowsFormsApp1
             this.CreateBtn = new DevExpress.XtraEditors.SimpleButton();
             this.SaveBtn = new DevExpress.XtraEditors.SimpleButton();
             this.textData = new DevExpress.XtraEditors.TextEdit();
+            this.clearBtn = new DevExpress.XtraEditors.SimpleButton();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.choseBtn = new DevExpress.XtraEditors.SimpleButton();
+            this.radioGr = new DevExpress.XtraEditors.RadioGroup();
             ((System.ComponentModel.ISupportInitialize)(this.image1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textData.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radioGr.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // labelControl1
@@ -71,7 +76,7 @@ namespace WindowsFormsApp1
             // 
             // SaveBtn
             // 
-            this.SaveBtn.Location = new System.Drawing.Point(180, 350);
+            this.SaveBtn.Location = new System.Drawing.Point(130, 350);
             this.SaveBtn.Name = "SaveBtn";
             this.SaveBtn.Size = new System.Drawing.Size(112, 34);
             this.SaveBtn.TabIndex = 2;
@@ -85,11 +90,56 @@ namespace WindowsFormsApp1
             this.textData.Size = new System.Drawing.Size(569, 28);
             this.textData.TabIndex = 3;
             // 
+            // clearBtn
+            // 
+            this.clearBtn.Location = new System.Drawing.Point(249, 349);
+            this.clearBtn.Name = "clearBtn";
+            this.clearBtn.Size = new System.Drawing.Size(112, 34);
+            this.clearBtn.TabIndex = 4;
+            this.clearBtn.Text = "Clear";
+            this.clearBtn.Click += new System.EventHandler(this.clearBtn_Click);
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl2.Appearance.Options.UseFont = true;
+            this.labelControl2.Location = new System.Drawing.Point(589, 13);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(160, 27);
+            this.labelControl2.TabIndex = 6;
+            this.labelControl2.Text = "QR/Bar_Code ";
+            // 
+            // choseBtn
+            // 
+            this.choseBtn.Location = new System.Drawing.Point(796, 46);
+            this.choseBtn.Name = "choseBtn";
+            this.choseBtn.Size = new System.Drawing.Size(83, 34);
+            this.choseBtn.TabIndex = 7;
+            this.choseBtn.Text = "Change";
+            // 
+            // radioGr
+            // 
+            this.radioGr.Location = new System.Drawing.Point(588, 46);
+            this.radioGr.Name = "radioGr";
+            this.radioGr.Properties.Columns = 2;
+            this.radioGr.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(true, "", true, null, "Code128"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem(true, "", true, null, "qr_code")});
+            this.radioGr.Size = new System.Drawing.Size(202, 47);
+            this.radioGr.TabIndex = 8;
+            this.radioGr.ToolTipIconType = DevExpress.Utils.ToolTipIconType.Exclamation;
+            this.radioGr.SelectedIndexChanged += new System.EventHandler(this.radioGr_SelectedIndexChanged);
+            this.radioGr.Click += new System.EventHandler(this.radioGr_Click);
+            // 
             // QR_Code
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1050, 435);
+            this.Controls.Add(this.radioGr);
+            this.Controls.Add(this.choseBtn);
+            this.Controls.Add(this.labelControl2);
+            this.Controls.Add(this.clearBtn);
             this.Controls.Add(this.textData);
             this.Controls.Add(this.SaveBtn);
             this.Controls.Add(this.CreateBtn);
@@ -97,8 +147,10 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.labelControl1);
             this.Name = "QR_Code";
             this.Text = "QR_Code";
+            this.Load += new System.EventHandler(this.QR_Code_Load);
             ((System.ComponentModel.ISupportInitialize)(this.image1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textData.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radioGr.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -111,7 +163,10 @@ namespace WindowsFormsApp1
         private DevExpress.XtraEditors.SimpleButton CreateBtn;
         private DevExpress.XtraEditors.SimpleButton SaveBtn;
         private DevExpress.XtraEditors.TextEdit textData;
-
+        private DevExpress.XtraEditors.SimpleButton clearBtn;
+        private DevExpress.XtraEditors.LabelControl labelControl2;
+        private DevExpress.XtraEditors.SimpleButton choseBtn;
+        private DevExpress.XtraEditors.RadioGroup radioGr;
     }
       
 }
