@@ -17,11 +17,6 @@ namespace WindowsFormsApp1
 {
     public partial class QR_Code : Form
     {
-        enum Code
-        {
-            QR_CODE,
-            Code_128
-        }
         public QR_Code()
         {
             InitializeComponent();
@@ -30,7 +25,7 @@ namespace WindowsFormsApp1
         }
         private void QR_Code_Load(object sender, EventArgs e)
         {
-          
+       
 
         }
 
@@ -40,8 +35,47 @@ namespace WindowsFormsApp1
 
 
         }
+        private void SaveBtn_Click(object sender, EventArgs e)
+        {
+            if (image1.Image == null)
+                return;
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog() { Filter = "Png |*. png" })
+            {
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    image1.Image.Save(saveFileDialog.FileName);
+            }
+        }
 
-        private void CreateBtn_Click(object sender, EventArgs e)
+        private void clearBtn_Click(object sender, EventArgs e)
+        {
+            image1.Image = null;
+            textData.Text = null;
+            labelCode.Text = "Code에 관해서 입니다.";
+        }
+
+        private void btnCode128_Click(object sender, EventArgs e)
+        {
+            BarcodeWriter qrcodeWriter = new BarcodeWriter();
+            EncodingOptions encodingOptions = new EncodingOptions()
+            {
+                Width = 300,
+                Height = 150,
+                Margin = 0,
+                PureBarcode = false,
+                GS1Format = true
+            };
+            encodingOptions.Hints.Add(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
+            qrcodeWriter.Renderer = new BitmapRenderer();
+            qrcodeWriter.Format = BarcodeFormat.CODE_128;
+            qrcodeWriter.Options = encodingOptions;
+            Bitmap bitmap = qrcodeWriter.Write(textData.Text);
+            Graphics g = Graphics.FromImage(bitmap);
+            image1.Image = bitmap;
+            labelCode.Text = "CODE_128 입니다.";
+
+        }
+
+        private void btnQr_Click(object sender, EventArgs e)
         {
             BarcodeWriter qrcodeWriter = new BarcodeWriter();
             EncodingOptions encodingOptions = new EncodingOptions()
@@ -59,35 +93,14 @@ namespace WindowsFormsApp1
             Bitmap bitmap = qrcodeWriter.Write(textData.Text);
             Graphics g = Graphics.FromImage(bitmap);
             image1.Image = bitmap;
+            labelCode.Text = "QR_CODE 입니다.";
+            
         }
 
-        private void SaveBtn_Click(object sender, EventArgs e)
-        {
-            if (image1.Image == null)
-                return;
-            using (SaveFileDialog saveFileDialog = new SaveFileDialog() { Filter = "Png |*. png" })
-            {
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                    image1.Image.Save(saveFileDialog.FileName);
-            }
-        }
-
-        private void clearBtn_Click(object sender, EventArgs e)
-        {
-            image1.Image = null;
-            textData.Text = null;
-        }
-
-        private void radioGr_SelectedIndexChanged(object sender, EventArgs e)
+        private void labelCode_Click(object sender, EventArgs e)
         {
 
         }
-
-        private void radioGr_Click(object sender, EventArgs e)
-        {
-                
-        }
-        
     }
 }
 
